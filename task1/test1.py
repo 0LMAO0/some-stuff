@@ -3,8 +3,8 @@ import unittest
 
 def analyse(programm: list[tuple[str, int]]) -> int:
     cnt = 0
-    srtd_prog = sorted(programm, key= lambda package: package[1])
-    for i in range(0, len(srtd_prog)-1):
+    srtd_prog = sorted(programm, key= lambda package: package[1])               # сортировка списка по номеру контейнера
+    for i in range(0, len(srtd_prog)-1):                                        # сортировка контейнеров по принципу: принять выгрузить номер
         for j in range(len(srtd_prog)-1):
             if (srtd_prog[j][0] == srtd_prog[j+1][0])\
             or (srtd_prog[j-1][1] == srtd_prog[j+1][1]):
@@ -12,7 +12,7 @@ def analyse(programm: list[tuple[str, int]]) -> int:
                 srtd_prog[j] = srtd_prog[j+1]
                 srtd_prog[j+1] = c
             
-    for i in range(0,len(srtd_prog)-1):
+    for i in range(0,len(srtd_prog)-1):                                         # дополнительная сортировка для проверки
         for j in range(len(srtd_prog)-1):
             if srtd_prog[j][0] == srtd_prog[j+1][0] and \
                 srtd_prog[j][1] > srtd_prog[j+1][1]:
@@ -20,7 +20,7 @@ def analyse(programm: list[tuple[str, int]]) -> int:
                 srtd_prog[j+1] = srtd_prog[j]
                 srtd_prog[j] = c
 
-    for i in range(len(srtd_prog)):
+    for i in range(len(srtd_prog)):                                             # подсчет единиц энергии
         if srtd_prog[i][0] == "принять":
             cnt += 1
         elif srtd_prog[i][0] == "выгрузить":
